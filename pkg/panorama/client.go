@@ -16,7 +16,7 @@ type Client struct {
 	baseUrl string
 }
 
-func New(baseUrl, username, password string, httpClient *http.Client) (*Client, error) {
+func New(baseUrl string, httpClient *http.Client) (*Client, error) {
 	return &Client{
 		BaseHttpClient: *uhttp.NewBaseHttpClient(httpClient),
 		baseUrl:        baseUrl,
