@@ -1,3 +1,34 @@
+# v1.51.4 (2024-03-07)
+
+* **Bug Fix**: Remove dependency on go-cmp.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.51.3 (2024-03-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.51.2 (2024-03-04)
+
+* **Bug Fix**: Update internal/presigned-url dependency for corrected API name.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.51.1 (2024-02-23)
+
+* **Bug Fix**: Move all common, SDK-side middleware stack ops into the service client module to prevent cross-module compatibility issues in the future.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.51.0 (2024-02-22)
+
+* **Feature**: Add middleware stack snapshot tests.
+
+# v1.50.3 (2024-02-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.50.2 (2024-02-20)
+
+* **Bug Fix**: When sourcing values for a service's `EndpointParameters`, the lack of a configured region (i.e. `options.Region == ""`) will now translate to a `nil` value for `EndpointParameters.Region` instead of a pointer to the empty string `""`. This will result in a much more explicit error when calling an operation instead of an obscure hostname lookup failure.
+
 # v1.50.1 (2024-02-19)
 
 * **Bug Fix**: Prevent potential panic caused by invalid comparison of credentials.
