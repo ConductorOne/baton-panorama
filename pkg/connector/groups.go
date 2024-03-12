@@ -44,14 +44,14 @@ func groupResource(group *panorama.Group) (*v2.Resource, error) {
 func (o *groupBuilder) List(ctx context.Context, parentResourceID *v2.ResourceId, pToken *pagination.Token) ([]*v2.Resource, string, annotations.Annotations, error) {
 	groups, _, err := o.client.ListGroups(ctx)
 	if err != nil {
-		return nil, "", nil, err // TODO: wrap error
+		return nil, "", nil, wrapError(err, "failed to list groups")
 	}
 
 	var resources []*v2.Resource
 	for _, group := range groups {
 		resource, err := groupResource(&group) // #nosec G601
 		if err != nil {
-			return nil, "", nil, err // TODO: wrap error
+			return nil, "", nil, wrapError(err, "failed to create group resource")
 		}
 
 		resources = append(resources, resource)
@@ -85,12 +85,12 @@ func (o *groupBuilder) Grants(ctx context.Context, resource *v2.Resource, pToken
 	for _, user := range group.Members {
 		u, _, err := o.client.GetUser(ctx, user)
 		if err != nil {
-			return nil, "", nil, err // TODO: wrap error
+			return nil, "", nil, wrapError(err, "failed to get user")
 		}
 
 		userResource, err := userResource(u)
 		if err != nil {
-			return nil, "", nil, err // TODO: wrap error
+			return nil, "", nil, wrapError(err, "failed to create user resource")
 		}
 
 		rv = append(rv, grant.NewGrant(resource, memberEntitlement, userResource))

@@ -51,14 +51,14 @@ func userResource(user *panorama.User) (*v2.Resource, error) {
 func (o *userBuilder) List(ctx context.Context, parentResourceID *v2.ResourceId, pToken *pagination.Token) ([]*v2.Resource, string, annotations.Annotations, error) {
 	users, _, err := o.client.ListUsers(ctx)
 	if err != nil {
-		return nil, "", nil, err // TODO: wrap error
+		return nil, "", nil, wrapError(err, "failed to list users")
 	}
 
 	var resources []*v2.Resource
 	for _, user := range users {
 		resource, err := userResource(&user) // #nosec G601
 		if err != nil {
-			return nil, "", nil, err // TODO: wrap error
+			return nil, "", nil, wrapError(err, "failed to create user resource")
 		}
 
 		resources = append(resources, resource)
