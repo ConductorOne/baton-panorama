@@ -47,7 +47,7 @@ func (d *Panorama) Validate(ctx context.Context) (annotations.Annotations, error
 // New returns a new instance of the connector.
 func New(ctx context.Context, panoramaUrl, username, password string, ignoreBadCertificate bool) (*Panorama, error) {
 	clientOptions := []uhttp.Option{}
-	if ignoreBadCertificate {
+	if ignoreBadCertificate { // #nosec G402
 		clientOptions = append(clientOptions, uhttp.WithTLSClientConfig(
 			&tls.Config{
 				InsecureSkipVerify: true,

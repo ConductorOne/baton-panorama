@@ -56,7 +56,7 @@ func (o *userBuilder) List(ctx context.Context, parentResourceID *v2.ResourceId,
 
 	var resources []*v2.Resource
 	for _, user := range users {
-		resource, err := userResource(&user)
+		resource, err := userResource(&user) // #nosec G601
 		if err != nil {
 			return nil, "", nil, err // TODO: wrap error
 		}

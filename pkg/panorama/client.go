@@ -8,7 +8,12 @@ import (
 	"github.com/conductorone/baton-sdk/pkg/uhttp"
 )
 
-const API_PATH = "/api"
+const (
+	ApiPath       = "/api"
+	RequstType    = "config"
+	RequestAction = "get"
+	SuccessStatus = "success"
+)
 
 type (
 	Client struct {

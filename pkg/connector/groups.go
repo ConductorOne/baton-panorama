@@ -49,7 +49,7 @@ func (o *groupBuilder) List(ctx context.Context, parentResourceID *v2.ResourceId
 
 	var resources []*v2.Resource
 	for _, group := range groups {
-		resource, err := groupResource(&group)
+		resource, err := groupResource(&group) // #nosec G601
 		if err != nil {
 			return nil, "", nil, err // TODO: wrap error
 		}

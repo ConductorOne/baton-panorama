@@ -33,7 +33,7 @@ type (
 )
 
 func (c *Client) ListUsers(ctx context.Context) ([]User, *http.Response, error) {
-	stringUrl, err := url.JoinPath(c.baseUrl, API_PATH)
+	stringUrl, err := url.JoinPath(c.baseUrl, ApiPath)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -43,13 +43,11 @@ func (c *Client) ListUsers(ctx context.Context) ([]User, *http.Response, error) 
 		return nil, nil, err
 	}
 
-	requestType := "config"
-	action := "get"
 	xpath := "/config/shared/local-user-database/user"
 
 	query := u.Query()
-	query.Set("type", requestType)
-	query.Set("action", action)
+	query.Set("type", RequstType)
+	query.Set("action", RequestAction)
 	query.Set("xpath", xpath)
 	u.RawQuery = query.Encode()
 
@@ -64,7 +62,7 @@ func (c *Client) ListUsers(ctx context.Context) ([]User, *http.Response, error) 
 		return nil, nil, err
 	}
 
-	if response.Status != "success" {
+	if response.Status != SuccessStatus {
 		return nil, nil, fmt.Errorf("failed to list users with error code: %s", response.Code)
 	}
 
@@ -77,7 +75,7 @@ func (c *Client) ListUsers(ctx context.Context) ([]User, *http.Response, error) 
 }
 
 func (c *Client) GetUser(ctx context.Context, name string) (*User, *http.Response, error) {
-	stringUrl, err := url.JoinPath(c.baseUrl, API_PATH)
+	stringUrl, err := url.JoinPath(c.baseUrl, ApiPath)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -87,13 +85,11 @@ func (c *Client) GetUser(ctx context.Context, name string) (*User, *http.Respons
 		return nil, nil, err
 	}
 
-	requestType := "config"
-	action := "get"
 	xpath := fmt.Sprintf("/config/shared/local-user-database/user/entry[@name='%s']", name)
 
 	query := u.Query()
-	query.Set("type", requestType)
-	query.Set("action", action)
+	query.Set("type", RequstType)
+	query.Set("action", RequestAction)
 	query.Set("xpath", xpath)
 	u.RawQuery = query.Encode()
 
@@ -108,14 +104,13 @@ func (c *Client) GetUser(ctx context.Context, name string) (*User, *http.Respons
 		return nil, nil, err
 	}
 
-	if response.Status != "success" {
+	if response.Status != SuccessStatus {
 		return nil, nil, fmt.Errorf("failed to get user with error code: %s", response.Code)
 	}
 
 	user := response.Result.User.mapToUser()
 
 	return &user, resp, nil
-
 }
 
 func (u *UserRaw) mapToUser() User {

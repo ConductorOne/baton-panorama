@@ -29,7 +29,7 @@ type (
 )
 
 func (c *Client) ListGroups(ctx context.Context) ([]Group, *http.Response, error) {
-	stringUrl, err := url.JoinPath(c.baseUrl, API_PATH)
+	stringUrl, err := url.JoinPath(c.baseUrl, ApiPath)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -39,13 +39,11 @@ func (c *Client) ListGroups(ctx context.Context) ([]Group, *http.Response, error
 		return nil, nil, err
 	}
 
-	requestType := "config"
-	action := "get"
 	xpath := "/config/shared/local-user-database/user-group"
 
 	query := u.Query()
-	query.Set("type", requestType)
-	query.Set("action", action)
+	query.Set("type", RequstType)
+	query.Set("action", RequestAction)
 	query.Set("xpath", xpath)
 	u.RawQuery = query.Encode()
 
@@ -60,7 +58,7 @@ func (c *Client) ListGroups(ctx context.Context) ([]Group, *http.Response, error
 		return nil, nil, err
 	}
 
-	if response.Status != "success" {
+	if response.Status != SuccessStatus {
 		return nil, resp, fmt.Errorf("failed to list user-groups with error code: %s", response.Code)
 	}
 
@@ -68,7 +66,7 @@ func (c *Client) ListGroups(ctx context.Context) ([]Group, *http.Response, error
 }
 
 func (c *Client) GetGroup(ctx context.Context, name string) (*Group, *http.Response, error) {
-	stringUrl, err := url.JoinPath(c.baseUrl, API_PATH)
+	stringUrl, err := url.JoinPath(c.baseUrl, ApiPath)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -78,13 +76,11 @@ func (c *Client) GetGroup(ctx context.Context, name string) (*Group, *http.Respo
 		return nil, nil, err
 	}
 
-	requestType := "config"
-	action := "get"
 	xpath := fmt.Sprintf("/config/shared/local-user-database/user-group/entry[@name='%s']", name)
 
 	query := u.Query()
-	query.Set("type", requestType)
-	query.Set("action", action)
+	query.Set("type", RequstType)
+	query.Set("action", RequestAction)
 	query.Set("xpath", xpath)
 	u.RawQuery = query.Encode()
 
@@ -99,7 +95,7 @@ func (c *Client) GetGroup(ctx context.Context, name string) (*Group, *http.Respo
 		return nil, nil, err
 	}
 
-	if response.Status != "success" {
+	if response.Status != SuccessStatus {
 		return nil, resp, fmt.Errorf("failed to get user-group with error code: %s", response.Code)
 	}
 
