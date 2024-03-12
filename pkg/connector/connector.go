@@ -20,6 +20,7 @@ type Panorama struct {
 func (d *Panorama) ResourceSyncers(ctx context.Context) []connectorbuilder.ResourceSyncer {
 	return []connectorbuilder.ResourceSyncer{
 		newUserBuilder(d.Client),
+		newGroupBuilder(d.Client),
 	}
 }
 

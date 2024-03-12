@@ -2,7 +2,6 @@ package connector
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/conductorone/baton-network-security/pkg/panorama"
 	v2 "github.com/conductorone/baton-sdk/pb/c1/connector/v2"
@@ -54,8 +53,6 @@ func (o *userBuilder) List(ctx context.Context, parentResourceID *v2.ResourceId,
 	if err != nil {
 		return nil, "", nil, err // TODO: wrap error
 	}
-
-	fmt.Printf("users: %v\n\n\n", users)
 
 	var resources []*v2.Resource
 	for _, user := range users {
