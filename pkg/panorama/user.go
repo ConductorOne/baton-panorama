@@ -9,8 +9,8 @@ import (
 
 type (
 	User struct {
-		Name     string `xml:"name,attr"`
-		Disabled bool   `xml:"disabled"`
+		Name     string
+		Disabled bool
 	}
 	UserRaw struct {
 		Name     string `xml:"name,attr"`
@@ -22,6 +22,13 @@ type (
 	ListUsersResponse struct {
 		PanoramaResponseBase
 		Result ListUsersResult `xml:"result"`
+	}
+	GetUserResult struct {
+		User UserRaw `xml:"entry"`
+	}
+	GetUserResponse struct {
+		PanoramaResponseBase
+		Result GetUserResult `xml:"result"`
 	}
 )
 
@@ -67,6 +74,48 @@ func (c *Client) ListUsers(ctx context.Context) ([]User, *http.Response, error) 
 	}
 
 	return users, resp, nil
+}
+
+func (c *Client) GetUser(ctx context.Context, name string) (*User, *http.Response, error) {
+	stringUrl, err := url.JoinPath(c.baseUrl, API_PATH)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	u, err := url.Parse(stringUrl)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	requestType := "config"
+	action := "get"
+	xpath := fmt.Sprintf("/config/shared/local-user-database/user/entry[@name='%s']", name)
+
+	query := u.Query()
+	query.Set("type", requestType)
+	query.Set("action", action)
+	query.Set("xpath", xpath)
+	u.RawQuery = query.Encode()
+
+	req, err := c.NewRequest(ctx, http.MethodPost, u, WithAcceptXMLHeader())
+	if err != nil {
+		return nil, nil, err
+	}
+
+	var response GetUserResponse
+	resp, err := c.Do(req, WithXMLResponse(&response))
+	if err != nil {
+		return nil, nil, err
+	}
+
+	if response.Status != "success" {
+		return nil, nil, fmt.Errorf("failed to get user with error code: %s", response.Code)
+	}
+
+	user := response.Result.User.mapToUser()
+
+	return &user, resp, nil
+
 }
 
 func (u *UserRaw) mapToUser() User {
