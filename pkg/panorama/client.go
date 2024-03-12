@@ -10,11 +10,18 @@ import (
 
 const API_PATH = "/api"
 
-type Client struct {
-	uhttp.BaseHttpClient
+type (
+	Client struct {
+		uhttp.BaseHttpClient
 
-	baseUrl string
-}
+		baseUrl string
+	}
+	PanoramaResponseBase struct {
+		XMLName xml.Name `xml:"response"`
+		Status  string   `xml:"status,attr"`
+		Code    string   `xml:"code,attr"`
+	}
+)
 
 func New(baseUrl string, httpClient *http.Client) (*Client, error) {
 	return &Client{

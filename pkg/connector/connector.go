@@ -2,6 +2,7 @@ package connector
 
 import (
 	"context"
+	"crypto/tls"
 	"io"
 
 	"github.com/conductorone/baton-network-security/pkg/panorama"
@@ -18,7 +19,7 @@ type Panorama struct {
 // ResourceSyncers returns a ResourceSyncer for each resource type that should be synced from the upstream service.
 func (d *Panorama) ResourceSyncers(ctx context.Context) []connectorbuilder.ResourceSyncer {
 	return []connectorbuilder.ResourceSyncer{
-		newUserBuilder(),
+		newUserBuilder(d.Client),
 	}
 }
 
@@ -43,8 +44,17 @@ func (d *Panorama) Validate(ctx context.Context) (annotations.Annotations, error
 }
 
 // New returns a new instance of the connector.
-func New(ctx context.Context, panoramaUrl, username, password string) (*Panorama, error) {
-	httpClient, err := uhttp.NewBasicAuth(username, password).GetClient(ctx)
+func New(ctx context.Context, panoramaUrl, username, password string, ignoreBadCertificate bool) (*Panorama, error) {
+	clientOptions := []uhttp.Option{}
+	if ignoreBadCertificate {
+		clientOptions = append(clientOptions, uhttp.WithTLSClientConfig(
+			&tls.Config{
+				InsecureSkipVerify: true,
+			},
+		))
+	}
+
+	httpClient, err := uhttp.NewBasicAuth(username, password).GetClient(ctx, clientOptions...)
 	if err != nil {
 		return nil, err
 	}

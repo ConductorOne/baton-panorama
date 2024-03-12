@@ -12,9 +12,10 @@ import (
 type config struct {
 	cli.BaseConfig `mapstructure:",squash"` // Puts the base config options in the same place as the connector options
 
-	PanoramaUrl string `mapstructure:"panorama-url"`
-	Username    string `mapstructure:"username"`
-	Password    string `mapstructure:"password"`
+	PanoramaUrl          string `mapstructure:"panorama-url"`
+	Username             string `mapstructure:"username"`
+	Password             string `mapstructure:"password"`
+	IgnoreBadCertificate bool   `mapstructure:"ignore-bad-certificate"`
 }
 
 // validateConfig is run after the configuration is loaded, and should return an error if it isn't valid.
@@ -35,4 +36,5 @@ func cmdFlags(cmd *cobra.Command) {
 	cmd.PersistentFlags().String("panorama-url", "", "Url of Panorama instance")
 	cmd.PersistentFlags().String("username", "", "Username")
 	cmd.PersistentFlags().String("password", "", "Password")
+	cmd.PersistentFlags().Bool("ignore-bad-certificate", false, "Ignore bad certificate. !This should be used only for testing purposes.")
 }

@@ -3,7 +3,7 @@ module github.com/conductorone/baton-network-security
 go 1.21.7
 
 require (
-	github.com/conductorone/baton-sdk v0.1.27
+	github.com/conductorone/baton-sdk v0.1.28-0.20240312102039-69dda33b29b6
 	github.com/grpc-ecosystem/go-grpc-middleware v1.4.0
 	go.uber.org/zap v1.27.0
 )
