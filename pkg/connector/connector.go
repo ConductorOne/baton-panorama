@@ -41,6 +41,11 @@ func (d *Panorama) Metadata(ctx context.Context) (*v2.ConnectorMetadata, error) 
 // Validate is called to ensure that the connector is properly configured. It should exercise any API credentials
 // to be sure that they are valid.
 func (d *Panorama) Validate(ctx context.Context) (annotations.Annotations, error) {
+	_, _, err := d.Client.ListUsers(ctx)
+	if err != nil {
+		return nil, err
+	}
+
 	return nil, nil
 }
 
