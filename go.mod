@@ -1,4 +1,4 @@
-module github.com/conductorone/baton-network-security
+module github.com/conductorone/baton-panorama
 
 go 1.21.7
 

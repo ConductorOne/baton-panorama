@@ -1,20 +1,20 @@
-project_name: baton-network-security
+project_name: baton-panorama
 builds:
-  - binary: baton-network-security
+  - binary: baton-panorama
     env:
       - CGO_ENABLED=0
     id: linux
-    main: ./cmd/baton-network-security
+    main: ./cmd/baton-panorama
     goos:
       - linux
     goarch:
       - amd64
       - arm64
-  - binary: baton-network-security
+  - binary: baton-panorama
     env:
       - CGO_ENABLED=0
     id: macos-amd64
-    main: ./cmd/baton-network-security
+    main: ./cmd/baton-panorama
     goos:
       - darwin
     goarch:
@@ -22,12 +22,12 @@ builds:
     hooks:
       post:
         - gon .gon-amd64.json
-        - mv dist/baton-network-security-darwin-amd64.signed.zip dist/macos-amd64_darwin_amd64_v1/baton-network-security
-  - binary: baton-network-security
+        - mv dist/baton-panorama-darwin-amd64.signed.zip dist/macos-amd64_darwin_amd64_v1/baton-panorama
+  - binary: baton-panorama
     env:
       - CGO_ENABLED=0
     id: macos-arm64
-    main: ./cmd/baton-network-security
+    main: ./cmd/baton-panorama
     goos:
       - darwin
     goarch:
@@ -35,7 +35,7 @@ builds:
     hooks:
       post:
         - gon .gon-arm64.json
-        - mv dist/baton-network-security-darwin-arm64.signed.zip dist/macos-arm64_darwin_arm64/baton-network-security
+        - mv dist/baton-panorama-darwin-arm64.signed.zip dist/macos-arm64_darwin_arm64/baton-panorama
 archives:
   - id: linux-archive
     builds:
@@ -71,9 +71,9 @@ brews:
     folder: Formula
     homepage: https://conductorone.com
     test: |
-      system "#{bin}/baton-network-security -v"
+      system "#{bin}/baton-panorama -v"
     install: |-
-      bin.install "baton-network-security"
+      bin.install "baton-panorama"
 changelog:
   filters:
     exclude:

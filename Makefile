@@ -3,14 +3,14 @@ GOARCH = $(shell go env GOARCH)
 BUILD_DIR = dist/${GOOS}_${GOARCH}
 
 ifeq ($(GOOS),windows)
-OUTPUT_PATH = ${BUILD_DIR}/baton-network-security.exe
+OUTPUT_PATH = ${BUILD_DIR}/baton-panorama.exe
 else
-OUTPUT_PATH = ${BUILD_DIR}/baton-network-security
+OUTPUT_PATH = ${BUILD_DIR}/baton-panorama
 endif
 
 .PHONY: build
 build:
-	go build -o ${OUTPUT_PATH} ./cmd/baton-network-security
+	go build -o ${OUTPUT_PATH} ./cmd/baton-panorama
 
 .PHONY: update-deps
 update-deps:

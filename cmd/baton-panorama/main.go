@@ -11,7 +11,7 @@ import (
 	"github.com/grpc-ecosystem/go-grpc-middleware/logging/zap/ctxzap"
 	"go.uber.org/zap"
 
-	"github.com/conductorone/baton-network-security/pkg/connector"
+	"github.com/conductorone/baton-panorama/pkg/connector"
 )
 
 var version = "dev"

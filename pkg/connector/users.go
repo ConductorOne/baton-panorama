@@ -3,7 +3,7 @@ package connector
 import (
 	"context"
 
-	"github.com/conductorone/baton-network-security/pkg/panorama"
+	"github.com/conductorone/baton-panorama/pkg/panorama"
 	v2 "github.com/conductorone/baton-sdk/pb/c1/connector/v2"
 	"github.com/conductorone/baton-sdk/pkg/annotations"
 	"github.com/conductorone/baton-sdk/pkg/pagination"
