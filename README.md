@@ -10,9 +10,11 @@ Check out [Baton](https://github.com/conductorone/baton) to learn more about the
 
 Connector requires credentials (username and password) that are used throughout the communication with API. Credentials are the same that you use to log in to Panorama.
 
-Pass credentials to connector can be done by setting `BATON_USERNAME` and `BATON_PASSWORD` or by passing `--username` and `--password`.
+Passing credentials to connector can be done by setting `BATON_USERNAME` and `BATON_PASSWORD` or by passing `--username` and `--password`.
 
 Also you can set up host of Panorama. It's can be done by `BATON_PANORAMA_URL` or by passing `--panorama-url`. 
+
+Important to mention that API has to be enabled for user. [See more](https://docs.paloaltonetworks.com/pan-os/10-2/pan-os-panorama-api/get-started-with-the-pan-os-xml-api/enable-api-access).
 
 # Getting Started
 
