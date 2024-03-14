@@ -57,7 +57,7 @@ github.com/aws/aws-sdk-go-v2/credentials/stscreds
 ## explicit; go 1.20
 github.com/aws/aws-sdk-go-v2/feature/ec2/imds
 github.com/aws/aws-sdk-go-v2/feature/ec2/imds/internal/config
-# github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.16.9
+# github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.16.10
 ## explicit; go 1.20
 github.com/aws/aws-sdk-go-v2/feature/s3/manager
 # github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.3
@@ -88,7 +88,7 @@ github.com/aws/aws-sdk-go-v2/service/internal/presigned-url
 github.com/aws/aws-sdk-go-v2/service/internal/s3shared
 github.com/aws/aws-sdk-go-v2/service/internal/s3shared/arn
 github.com/aws/aws-sdk-go-v2/service/internal/s3shared/config
-# github.com/aws/aws-sdk-go-v2/service/s3 v1.51.4
+# github.com/aws/aws-sdk-go-v2/service/s3 v1.52.0
 ## explicit; go 1.20
 github.com/aws/aws-sdk-go-v2/service/s3
 github.com/aws/aws-sdk-go-v2/service/s3/internal/arn
@@ -140,7 +140,7 @@ github.com/aws/smithy-go/waiter
 # github.com/benbjohnson/clock v1.3.5
 ## explicit; go 1.15
 github.com/benbjohnson/clock
-# github.com/conductorone/baton-sdk v0.1.28-0.20240312102039-69dda33b29b6
+# github.com/conductorone/baton-sdk v0.1.28
 ## explicit; go 1.20
 github.com/conductorone/baton-sdk/internal/connector
 github.com/conductorone/baton-sdk/pb/c1/c1z/v1
@@ -385,7 +385,7 @@ golang.org/x/crypto/poly1305
 golang.org/x/crypto/scrypt
 golang.org/x/crypto/ssh
 golang.org/x/crypto/ssh/internal/bcrypt_pbkdf
-# golang.org/x/exp v0.0.0-20240222234643-814bf88cf225
+# golang.org/x/exp v0.0.0-20240314144324-c7f7c6466f7f
 ## explicit; go 1.20
 golang.org/x/exp/constraints
 golang.org/x/exp/slices
@@ -441,7 +441,7 @@ google.golang.org/appengine/internal/log
 google.golang.org/appengine/internal/remote_api
 google.golang.org/appengine/internal/urlfetch
 google.golang.org/appengine/urlfetch
-# google.golang.org/genproto/googleapis/rpc v0.0.0-20240311132316-a219d84964c2
+# google.golang.org/genproto/googleapis/rpc v0.0.0-20240311173647-c811ad7063a7
 ## explicit; go 1.19
 google.golang.org/genproto/googleapis/rpc/status
 # google.golang.org/grpc v1.62.1
@@ -550,7 +550,7 @@ gopkg.in/yaml.v2
 # gopkg.in/yaml.v3 v3.0.1
 ## explicit
 gopkg.in/yaml.v3
-# modernc.org/libc v1.43.1
+# modernc.org/libc v1.44.1
 ## explicit; go 1.20
 modernc.org/libc
 modernc.org/libc/errno
@@ -584,6 +584,6 @@ modernc.org/mathutil
 # modernc.org/memory v1.7.2
 ## explicit; go 1.18
 modernc.org/memory
-# modernc.org/sqlite v1.29.3
+# modernc.org/sqlite v1.29.5
 ## explicit; go 1.20
 modernc.org/sqlite/lib

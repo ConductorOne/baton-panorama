@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+
+	"github.com/conductorone/baton-sdk/pkg/uhttp"
 )
 
 type (
@@ -47,13 +49,13 @@ func (c *Client) ListGroups(ctx context.Context) ([]Group, *http.Response, error
 	query.Set("xpath", xpath)
 	u.RawQuery = query.Encode()
 
-	req, err := c.NewRequest(ctx, http.MethodPost, u, WithAcceptXMLHeader())
+	req, err := c.NewRequest(ctx, http.MethodPost, u, uhttp.WithAcceptXMLHeader())
 	if err != nil {
 		return nil, nil, err
 	}
 
 	var response ListGroupsResponse
-	resp, err := c.Do(req, WithXMLResponse(&response))
+	resp, err := c.Do(req, uhttp.WithXMLResponse(&response))
 	if err != nil {
 		return nil, nil, err
 	}
@@ -84,13 +86,13 @@ func (c *Client) GetGroup(ctx context.Context, name string) (*Group, *http.Respo
 	query.Set("xpath", xpath)
 	u.RawQuery = query.Encode()
 
-	req, err := c.NewRequest(ctx, http.MethodPost, u, WithAcceptXMLHeader())
+	req, err := c.NewRequest(ctx, http.MethodPost, u, uhttp.WithAcceptXMLHeader())
 	if err != nil {
 		return nil, nil, err
 	}
 
 	var response GetGroupResponse
-	resp, err := c.Do(req, WithXMLResponse(&response))
+	resp, err := c.Do(req, uhttp.WithXMLResponse(&response))
 	if err != nil {
 		return nil, nil, err
 	}

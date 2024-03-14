@@ -838,7 +838,6 @@ X__builtin_inf
 X__builtin_inff
 X__builtin_infl
 X__builtin_isnan
-X__builtin_isprint
 X__builtin_isunordered
 X__builtin_llabs
 X__builtin_log2

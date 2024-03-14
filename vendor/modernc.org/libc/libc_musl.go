@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-//go:build linux && amd64
+//go:build linux && (amd64 || loong64)
 
 //go:generate go run generator.go
 
@@ -227,6 +227,7 @@ type tlsStackSlot struct {
 type TLS struct {
 	allocaStack         [][]uintptr
 	allocas             []uintptr
+	jumpBuffers         []uintptr
 	pthread             uintptr // *t__pthread
 	pthreadCleanupItems []pthreadCleanupItem
 	pthreadKeyValues    map[Tpthread_key_t]uintptr
@@ -386,6 +387,29 @@ func (tls *TLS) Close() {
 	if tls.ownsPthread {
 		Xfree(tls, tls.pthread)
 	}
+}
+
+func (tls *TLS) PushJumpBuffer(jb uintptr) {
+	tls.jumpBuffers = append(tls.jumpBuffers, jb)
+}
+
+type LongjmpRetval int32
+
+func (tls *TLS) PopJumpBuffer(jb uintptr) {
+	n := len(tls.jumpBuffers)
+	if n == 0 || tls.jumpBuffers[n-1] != jb {
+		panic(todo("unsupported setjmp/longjmp usage"))
+	}
+
+	tls.jumpBuffers = tls.jumpBuffers[:n-1]
+}
+
+func (tls *TLS) Longjmp(jb uintptr, val int32) {
+	tls.PopJumpBuffer(jb)
+	if val == 0 {
+		val = 1
+	}
+	panic(LongjmpRetval(val))
 }
 
 // ============================================================================

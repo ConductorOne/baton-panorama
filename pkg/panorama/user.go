@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+
+	"github.com/conductorone/baton-sdk/pkg/uhttp"
 )
 
 type (
@@ -51,13 +53,13 @@ func (c *Client) ListUsers(ctx context.Context) ([]User, *http.Response, error) 
 	query.Set("xpath", xpath)
 	u.RawQuery = query.Encode()
 
-	req, err := c.NewRequest(ctx, http.MethodPost, u, WithAcceptXMLHeader())
+	req, err := c.NewRequest(ctx, http.MethodPost, u, uhttp.WithAcceptXMLHeader())
 	if err != nil {
 		return nil, nil, err
 	}
 
 	var response ListUsersResponse
-	resp, err := c.Do(req, WithXMLResponse(&response))
+	resp, err := c.Do(req, uhttp.WithXMLResponse(&response))
 	if err != nil {
 		return nil, nil, err
 	}
@@ -93,13 +95,13 @@ func (c *Client) GetUser(ctx context.Context, name string) (*User, *http.Respons
 	query.Set("xpath", xpath)
 	u.RawQuery = query.Encode()
 
-	req, err := c.NewRequest(ctx, http.MethodPost, u, WithAcceptXMLHeader())
+	req, err := c.NewRequest(ctx, http.MethodPost, u, uhttp.WithAcceptXMLHeader())
 	if err != nil {
 		return nil, nil, err
 	}
 
 	var response GetUserResponse
-	resp, err := c.Do(req, WithXMLResponse(&response))
+	resp, err := c.Do(req, uhttp.WithXMLResponse(&response))
 	if err != nil {
 		return nil, nil, err
 	}
