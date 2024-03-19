@@ -1,6 +1,6 @@
 {
-  "source": ["./dist/macos-arm64_darwin_arm64/baton-network-security"],
-  "bundle_id": "com.conductorone.baton-network-security",
+  "source": ["./dist/macos-arm64_darwin_arm64/baton-panorama"],
+  "bundle_id": "com.conductorone.baton-panorama",
   "apple_id": {
     "username" : "justin.gallardo@conductorone.com",
     "password":  "@env:AC_PASSWORD"
@@ -9,6 +9,6 @@
     "application_identity": "Developer ID Application: Justin Gallardo (858DKH55XL)"
   },
   "zip" :{
-    "output_path":  "./dist/baton-network-security-darwin-arm64.signed.zip"
+    "output_path":  "./dist/baton-panorama-darwin-arm64.signed.zip"
   }
 }
