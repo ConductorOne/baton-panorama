@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"net/http"
-	"net/url"
 
 	"github.com/conductorone/baton-sdk/pkg/uhttp"
 )
@@ -31,18 +30,9 @@ type (
 )
 
 func (c *Client) ListGroups(ctx context.Context) ([]Group, *http.Response, error) {
-	stringUrl, err := url.JoinPath(c.baseUrl, ApiPath)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	u, err := url.Parse(stringUrl)
-	if err != nil {
-		return nil, nil, err
-	}
-
 	xpath := "/config/shared/local-user-database/user-group"
 
+	u := c.GetUrl()
 	query := u.Query()
 	query.Set("type", RequstType)
 	query.Set("action", RequestAction)
@@ -68,18 +58,9 @@ func (c *Client) ListGroups(ctx context.Context) ([]Group, *http.Response, error
 }
 
 func (c *Client) GetGroup(ctx context.Context, name string) (*Group, *http.Response, error) {
-	stringUrl, err := url.JoinPath(c.baseUrl, ApiPath)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	u, err := url.Parse(stringUrl)
-	if err != nil {
-		return nil, nil, err
-	}
-
 	xpath := fmt.Sprintf("/config/shared/local-user-database/user-group/entry[@name='%s']", name)
 
+	u := c.GetUrl()
 	query := u.Query()
 	query.Set("type", RequstType)
 	query.Set("action", RequestAction)

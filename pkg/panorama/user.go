@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"net/http"
-	"net/url"
 
 	"github.com/conductorone/baton-sdk/pkg/uhttp"
 )
@@ -35,18 +34,9 @@ type (
 )
 
 func (c *Client) ListUsers(ctx context.Context) ([]User, *http.Response, error) {
-	stringUrl, err := url.JoinPath(c.baseUrl, ApiPath)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	u, err := url.Parse(stringUrl)
-	if err != nil {
-		return nil, nil, err
-	}
-
 	xpath := "/config/shared/local-user-database/user"
 
+	u := c.GetUrl()
 	query := u.Query()
 	query.Set("type", RequstType)
 	query.Set("action", RequestAction)
@@ -77,18 +67,9 @@ func (c *Client) ListUsers(ctx context.Context) ([]User, *http.Response, error) 
 }
 
 func (c *Client) GetUser(ctx context.Context, name string) (*User, *http.Response, error) {
-	stringUrl, err := url.JoinPath(c.baseUrl, ApiPath)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	u, err := url.Parse(stringUrl)
-	if err != nil {
-		return nil, nil, err
-	}
-
 	xpath := fmt.Sprintf("/config/shared/local-user-database/user/entry[@name='%s']", name)
 
+	u := c.GetUrl()
 	query := u.Query()
 	query.Set("type", RequstType)
 	query.Set("action", RequestAction)

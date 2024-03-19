@@ -21,10 +21,10 @@ func (o *userBuilder) ResourceType(ctx context.Context) *v2.ResourceType {
 
 func getUserStatus(user *panorama.User) v2.UserTrait_Status_Status {
 	if user.Disabled {
-		return v2.UserTrait_Status_STATUS_ENABLED
+		return v2.UserTrait_Status_STATUS_DISABLED
 	}
 
-	return v2.UserTrait_Status_STATUS_DISABLED
+	return v2.UserTrait_Status_STATUS_ENABLED
 }
 
 func userResource(user *panorama.User) (*v2.Resource, error) {
