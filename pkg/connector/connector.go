@@ -10,6 +10,7 @@ import (
 	"github.com/conductorone/baton-sdk/pkg/annotations"
 	"github.com/conductorone/baton-sdk/pkg/connectorbuilder"
 	"github.com/conductorone/baton-sdk/pkg/uhttp"
+	"github.com/grpc-ecosystem/go-grpc-middleware/logging/zap/ctxzap"
 )
 
 type Panorama struct {
@@ -53,6 +54,9 @@ func (d *Panorama) Validate(ctx context.Context) (annotations.Annotations, error
 func New(ctx context.Context, panoramaUrl, username, password string, ignoreBadCertificate bool) (*Panorama, error) {
 	clientOptions := []uhttp.Option{}
 	if ignoreBadCertificate {
+		l := ctxzap.Extract(ctx)
+		l.Warn("Ignoring bad certificate. This should only be used for testing purposes.")
+
 		clientOptions = append(clientOptions, uhttp.WithTLSClientConfig(
 			&tls.Config{
 				InsecureSkipVerify: true, // #nosec G402
