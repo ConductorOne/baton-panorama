@@ -3,11 +3,30 @@
   "resourceTypeCapabilities": [
     {
       "resourceType": {
+        "id": "group",
+        "displayName": "Group",
+        "traits": [
+          "TRAIT_GROUP"
+        ],
+        "description": "Users group of Panorama administration"
+      },
+      "capabilities": [
+        "CAPABILITY_SYNC"
+      ]
+    },
+    {
+      "resourceType": {
         "id": "user",
         "displayName": "User",
         "traits": [
           "TRAIT_USER"
-        ]
+        ],
+        "annotations": [
+          {
+            "@type": "type.googleapis.com/c1.connector.v2.SkipEntitlementsAndGrants"
+          }
+        ],
+        "description": "User of Panorama administration"
       },
       "capabilities": [
         "CAPABILITY_SYNC"
