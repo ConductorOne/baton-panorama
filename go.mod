@@ -1,6 +1,6 @@
 module github.com/conductorone/baton-panorama
 
-go 1.21.7
+go 1.23
 
 require (
 	github.com/conductorone/baton-sdk v0.1.28
