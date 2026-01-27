@@ -97,12 +97,8 @@ func (c *Client) GetUser(ctx context.Context, name string) (*User, *http.Respons
 }
 
 func (u *UserRaw) mapToUser() User {
-	disabled := false
-	if u.Disabled == "yes" {
-		disabled = true
-	}
 	return User{
 		Name:     u.Name,
-		Disabled: disabled,
+		Disabled: u.Disabled == "yes",
 	}
 }

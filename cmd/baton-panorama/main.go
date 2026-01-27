@@ -2,16 +2,16 @@ package main
 
 import (
 	"context"
-	"fmt"
-	"os"
 
 	"github.com/conductorone/baton-sdk/pkg/cli"
+	"github.com/conductorone/baton-sdk/pkg/config"
 	"github.com/conductorone/baton-sdk/pkg/connectorbuilder"
-	"github.com/conductorone/baton-sdk/pkg/types"
+	"github.com/conductorone/baton-sdk/pkg/connectorrunner"
 	"github.com/grpc-ecosystem/go-grpc-middleware/logging/zap/ctxzap"
 	"go.uber.org/zap"
 
 	"github.com/conductorone/baton-panorama/pkg/connector"
+	cfg "github.com/conductorone/baton-panorama/pkg/config"
 )
 
 var version = "dev"
@@ -19,37 +19,24 @@ var version = "dev"
 func main() {
 	ctx := context.Background()
 
-	cfg := &config{}
-	cmd, err := cli.NewCmd(ctx, "baton-panorama", cfg, validateConfig, getConnector)
-	if err != nil {
-		fmt.Fprintln(os.Stderr, err.Error())
-		os.Exit(1)
-	}
-
-	cmd.Version = version
-	cmdFlags(cmd)
-
-	err = cmd.Execute()
-	if err != nil {
-		fmt.Fprintln(os.Stderr, err.Error())
-		os.Exit(1)
-	}
+	config.RunConnector(
+		ctx,
+		"baton-panorama",
+		version,
+		cfg.ConfigurationSchema,
+		getConnector,
+		connectorrunner.WithDefaultCapabilitiesConnectorBuilderV2(&connector.Panorama{}),
+	)
 }
 
-func getConnector(ctx context.Context, cfg *config) (types.ConnectorServer, error) {
+func getConnector(ctx context.Context, panoramaCfg *cfg.Panorama, opts *cli.ConnectorOpts) (connectorbuilder.ConnectorBuilderV2, []connectorbuilder.Opt, error) {
 	l := ctxzap.Extract(ctx)
 
-	cb, err := connector.New(ctx, cfg.PanoramaUrl, cfg.Username, cfg.Password, cfg.IgnoreBadCertificate)
+	cb, err := connector.New(ctx, panoramaCfg.PanoramaUrl, panoramaCfg.Username, panoramaCfg.Password, panoramaCfg.IgnoreBadCertificate)
 	if err != nil {
 		l.Error("error creating connector", zap.Error(err))
-		return nil, err
+		return nil, nil, err
 	}
 
-	c, err := connectorbuilder.NewConnector(ctx, cb)
-	if err != nil {
-		l.Error("error creating connector", zap.Error(err))
-		return nil, err
-	}
-
-	return c, nil
+	return cb, nil, nil
 }
