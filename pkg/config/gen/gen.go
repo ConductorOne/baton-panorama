@@ -1,6 +1,3 @@
-//go:build ignore
-// +build ignore
-
 package main
 
 import (
@@ -9,5 +6,5 @@ import (
 )
 
 func main() {
-	config.Generate("panorama", cfg.ConfigurationSchema)
+	config.Generate("panorama", cfg.Config)
 }

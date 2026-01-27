@@ -35,6 +35,7 @@ var (
 		IgnoreBadCertificateField,
 	}
 
-	// ConfigurationSchema defines the schema for the connector's configuration.
-	ConfigurationSchema = field.NewConfiguration(ConfigurationFields)
 )
+
+//go:generate go run ./gen
+var Config = field.NewConfiguration(ConfigurationFields)

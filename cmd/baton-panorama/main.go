@@ -23,7 +23,7 @@ func main() {
 		ctx,
 		"baton-panorama",
 		version,
-		cfg.ConfigurationSchema,
+		cfg.Config,
 		getConnector,
 		connectorrunner.WithDefaultCapabilitiesConnectorBuilderV2(&connector.Panorama{}),
 	)
