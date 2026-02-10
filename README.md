@@ -1,6 +1,6 @@
 ![Baton Logo](./docs/images/baton-logo.png)
 
-# `baton-panorama` [![Go Reference](https://pkg.go.dev/badge/github.com/conductorone/baton-panorama.svg)](https://pkg.go.dev/github.com/conductorone/baton-panorama) ![main ci](https://github.com/conductorone/baton-panorama/actions/workflows/main.yaml/badge.svg)
+# `baton-panorama` [![Go Reference](https://pkg.go.dev/badge/github.com/conductorone/baton-panorama.svg)](https://pkg.go.dev/github.com/conductorone/baton-panorama) ![verify](https://github.com/conductorone/baton-panorama/actions/workflows/verify.yaml/badge.svg)
 
 `baton-panorama` is a connector for Baton built using the [Baton SDK](https://github.com/conductorone/baton-sdk). It works with Panorama XML API.
 
@@ -12,7 +12,7 @@ Connector requires credentials (username and password) that are used throughout 
 
 Passing credentials to connector can be done by setting `BATON_USERNAME` and `BATON_PASSWORD` or by passing `--username` and `--password`.
 
-Also you can set up host of Panorama. It's can be done by `BATON_PANORAMA_URL` or by passing `--panorama-url`. 
+Also you can set up host of Panorama. It's can be done by `BATON_PANORAMA_URL` or by passing `--panorama-url`.
 
 Important to mention that API has to be enabled for user. [See more](https://docs.paloaltonetworks.com/pan-os/10-2/pan-os-panorama-api/get-started-with-the-pan-os-xml-api/enable-api-access).
 
