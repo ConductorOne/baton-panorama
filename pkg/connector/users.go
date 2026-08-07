@@ -31,12 +31,12 @@ func userResource(user *panorama.User) (*v2.Resource, error) {
 	}
 
 	userTraits := []rs.UserTraitOption{
-		rs.WithUserProfile(profile),
 		rs.WithUserLogin(user.Name),
-		rs.WithStatus(getUserStatus(user)),
 	}
 
-	r, err := rs.NewUserResource(user.Name, userResourceType, user.Name, userTraits)
+	r, err := rs.NewUserResource(user.Name, userResourceType, user.Name, userTraits,
+		rs.WithResourceProfile(profile),
+		rs.WithResourceStatus(v2.Status_ResourceStatus(getUserStatus(user)), ""))
 	if err != nil {
 		return nil, err
 	}

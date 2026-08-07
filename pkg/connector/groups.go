@@ -27,11 +27,10 @@ func groupResource(group *panorama.Group) (*v2.Resource, error) {
 		"name": group.Name,
 	}
 
-	groupTraits := []rs.GroupTraitOption{
-		rs.WithGroupProfile(profile),
-	}
+	groupTraits := []rs.GroupTraitOption{}
 
-	r, err := rs.NewGroupResource(group.Name, groupResourceType, group.Name, groupTraits)
+	r, err := rs.NewGroupResource(group.Name, groupResourceType, group.Name, groupTraits,
+		rs.WithResourceProfile(profile))
 	if err != nil {
 		return nil, err
 	}
